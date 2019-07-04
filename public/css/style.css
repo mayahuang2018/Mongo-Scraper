@@ -1,33 +1,28 @@
+/* @import url('https://fonts.googleapis.com/css?family=DM+Serif+Display&display=swap'); */
 
 body{
     background:
-    url(./001.jpeg) no-repeat center center fixed;
+    url('../images/001.jpeg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size:cover;
+
+  
     background-size:cover;
 
     font-family: 'DM Serif Text', serif;
     /* font-family: 'Literata', serif; */
-   }
-
-
-body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-  }
+   }
+
 
  main {
     flex: 1 0 auto;
   }
 
 .blankArea{
-    padding-bottom: 340px;
+    padding-bottom: 300px;
 }
 
-  /* .slider.background-image {
-    height: 100%;
-    background-image: url(../public/001.jpeg);
-    background-size: cover;
-} */

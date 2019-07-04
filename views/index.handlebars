@@ -1,50 +1,67 @@
+
+{{!-- nav bar --}}
    <nav class="#424242 grey darken-3 z-depth-5">
     <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Mongo Scraper</a>
+        <a href="/" class="brand-logo">Mongo Scraper</a>
         <ul class="right #424242 grey darken-3">
-            <li><a class="waves-effect waves-light btn #212121 grey darken-4">Scraping New Articles!</a></li>
-            <li><a class="waves-effect waves-light btn #212121 grey darken-4">Clear Articles!</a></li>
-            <li><a href="/"><i class="material-icons left">account_box</i>Saved Articles</a></li>
-            <li><a href="/">Home</a></li>
+            {{!-- scrape button --}}
+            <li><a href="/scrape" class="scrape-new waves-effect waves-light btn #212121 grey darken-4">Scraping New Articles!</a></li>
+            {{!-- clear button --}}
+            <li><a href="/Uhoh" class="clear waves-effect waves-light btn #212121 grey darken-4">Clear Articles!</a></li>
+            {{!-- to saved articles page --}}
+            <li><a href="/saved"><i class="material-icons left">account_box</i>Saved Articles</a></li>
         </ul>
     </div>
 </nav>
 
 <div class="blankArea N/A transparent "></div>
 <div class="#e0e0e0 grey lighten-2 z-depth-5">
-    <h5><i class="small material-icons left">featured_play_list</i>New York Times Edition</h5>
+    <h5><i class="small material-icons left">featured_play_list</i>New York Times International News</h5>
 </div>
 
-<main>
-    <div class="#f5f5f5 grey lighten-4" id="articles">
+ {{!-- article container --}}
+<main class="article-container">
+
+    {{!-- each result card --}}
+     {{#each results}}
+    <div class="#f5f5f5 grey lighten-4">
         <div class="row">
             <div class="col s12 ">
                 <div class="card #757575 grey darken-1">
+                   {{!-- title --}}
                     <div class="card-content white-text">
-                        <span class="card-title">标题（点击到官网）</span>
-                        <button id="saveArticle"
-                            class="btn-floating right waves-effect waves-light #ff5252 red accent-2"><i
+                        <span class="card-title">{{title}}</span>
+                        {{!-- favourite button --}}
+                       
+                        <button id="{{_id}}"
+                            class="saveArticle btn-floating right waves-effect waves-light #ff5252 red accent-2"><i
                                 class="material-icons">favorite_border</i></button>
-                        <h5>报道概要</h5>
+                    
+                        {{!-- summary --}}
+                        <p>{{summary}}</p>
                     </div>
-                    <div class="card-action center">
-                        <a href="#">Read more!</a>
+                    {{!-- link to the article--}}
+                    <div class="card-action">
+                        <a class="#d7ccc8 brown-text text-lighten-4"href="{{link}}">Read more</a>
                     </div>
+                  
                 </div>
             </div>
         </div>
-
-
     </div>
+
+ {{/each}}
 
 </main>
 
-
+{{!-- footer --}}
 <footer class="page-footer N/A transparent">
 
     <div class="footer-copyright">
-        <div class="container #424242 grey-text text-darken-3">
+        <div class="container #424242 grey-text text-darken-3 center">
             New York Times Mongo Scraper
         </div>
     </div>
 </footer>
+
+<script src="https://code.jquery.com/jquery.js"></script>  
