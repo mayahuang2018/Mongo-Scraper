@@ -10,6 +10,7 @@ var NoteSchema = new Schema({
 
 });
 
+//创建Note类；
 var Note = mongoose.model("Note", NoteSchema);
 
 module.exports = Note;

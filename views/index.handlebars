@@ -7,7 +7,7 @@
             {{!-- scrape button --}}
             <li><a href="/scrape" class="scrape-new waves-effect waves-light btn #212121 grey darken-4">Scraping New Articles!</a></li>
             {{!-- clear button --}}
-            <li><a href="/Uhoh" class="clear waves-effect waves-light btn #212121 grey darken-4">Clear Articles!</a></li>
+            <li><a class="clear waves-effect waves-light btn #212121 grey darken-4">Clear Articles!</a></li>
             {{!-- to saved articles page --}}
             <li><a href="/saved"><i class="material-icons left">account_box</i>Saved Articles</a></li>
         </ul>
@@ -23,7 +23,8 @@
 <main class="article-container">
 
     {{!-- each result card --}}
-     {{#each results}}
+    {{#each articles}}
+      {{#unless saved}}
     <div class="#f5f5f5 grey lighten-4">
         <div class="row">
             <div class="col s12 ">
@@ -50,7 +51,8 @@
         </div>
     </div>
 
- {{/each}}
+ {{/unless}}
+{{/each}}
 
 </main>
 
