@@ -1,8 +1,8 @@
 <nav class="#424242 grey darken-3 z-depth-5">
     <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Mongo Scraper</a>
+        <a href="/" class="brand-logo">Mongo Scraper</a>
         <ul class="right #424242 grey darken-3">
-            <li><a  class="clear waves-effect waves-light btn #212121 grey darken-4">Clear Articles!</a></li>
+            <li><a class="clear waves-effect waves-light btn #212121 grey darken-4">Clear Articles!</a></li>
             <li><a href="/saved"><i class="material-icons left">account_box</i>Saved Articles</a></li>
         </ul>
     </div>
@@ -14,7 +14,8 @@
 </div>
 
 <main class="article-container">
-     {{#each results}}
+     {{#each articles}}
+      {{#if saved}}
     <div class="#f5f5f5 grey lighten-4">
         <div class="row">
             <div class="col s12 ">
@@ -36,13 +37,16 @@
 
 
     </div>
-
+    {{/if}}
+{{/each}}
 </main>
+
+<div class="emptyAlert"></div>
 
 <footer class="page-footer N/A transparent">
 
     <div class="footer-copyright">
-        <div class="container #424242 grey-text text-darken-3">
+        <div class="container #424242 grey-text text-darken-3 center">
             New York Times Mongo Scraper
         </div>
     </div>

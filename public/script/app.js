@@ -12,6 +12,7 @@ $(document).ready(function () {
     function initPage() {
         $.get("/api/headlines?saved=false").then(function (data) {
             articleContainer.empty();
+            $(".emptyAlert").empty();
             // If we have headlines, render them to the page
             if (data && data.length) {
                     $.ajax({
@@ -24,44 +25,11 @@ $(document).ready(function () {
                    
             } else {
                 // Otherwise render a message explaining we have no articles
-                renderEmpty();
+                handleArticleClear();
             }
         });
     }
-
-    //make every JSON object to a card and send cards to "article-container" area
    
-    // renders some HTML to the page explaining we don't have any articles to view
-         
-    function renderEmpty() {
-        var emptyAlert = $(
-            [ `<div class="#f8bbd0 pink lighten-4 z-depth-5">
-                <h5><i class="small material-icons left">error</i>Uh Oh. Looks like we don't have any new articles.</h5>
-             </div>
-             <main>
-                <div class="#f5f5f5 grey lighten-4">
-                    <div class="row">
-                        <div class="col s12 ">
-                            <div class="card #757575 grey darken-1">
-                                <div class="card-content white-text center">
-                                    <span class="card-title"></span>
-                                    <h5>What would you like to do?</h5>
-                                </div>
-                                <div class="card-action center">
-                                    <a class='scrape-new>Try Scraping New Articles</a>
-                                    <a href="/saved">Go to Saved Articles</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>`
-            ].join("")
-        );
-        // Appending this data to the page
-        articleContainer.append(emptyAlert);
-    }
-
     function handleArticleSave() {
         console.log("article saved!")
         // This function is triggered when the user wants to save an article
@@ -79,17 +47,19 @@ $(document).ready(function () {
         articleToSave.saved = true;
         // Using a patch method to be semantic since this is an update to an existing record in our collection
         $.ajax({
-            method: "PUT",
+            method: "POST",
             url: "/articles/save/" + articleToSave._id,
             data: articleToSave
-        }).then(function (data) {
-            // If the data was saved successfully
+        }).done(function (data) {
+  
             if (data.saved) {
-                // Run the initPage function again. This will reload the entire list of articles
-                initPage();
-            }
+                console.log(data.saved)
+                window.location = "/saved"
+             }
         });
     }
+
+
 
      // This function handles the user clicking any "scrape new article" buttons
     function handleArticleScrape() {
@@ -101,11 +71,15 @@ $(document).ready(function () {
         });
     }
     
+    // renders some HTML to the page explaining we don't have any articles to view
+         
+
     function handleArticleClear() {
-        $.get("api/clear").then(function () {
-            articleContainer.empty();
-           
-        });
+
+        articleContainer.empty();
+       
+        $(".emptyAlert").html("<h5>Uh Oh. Looks like we don't have any new articles.</h5>");
+       
     }
 
 

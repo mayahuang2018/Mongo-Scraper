@@ -81,7 +81,7 @@ app.get("/scrape", function (req, res) {
     });
 
     // res.render("index",{ results: results });
-    res.send("Scrape Complete");
+     res.send("Scrape Complete");
   });
 
 
@@ -90,7 +90,7 @@ app.get("/scrape", function (req, res) {
 //home
 app.get("/", function (req, res) {
   // If we were able to successfully find Articles, send them to the index page
-  db.Article.find({}).then(function (dbArticle) {
+  db.Article.find({}).then(function (dbArticle) { 
     const retrievedArticles = dbArticle;
     let hbsObject;
     hbsObject = {
@@ -98,24 +98,6 @@ app.get("/", function (req, res) {
     };
     res.render("index", hbsObject);
   })
-    .catch(function (err) {
-      // If an error occurred, send it to the client
-      res.json(err);
-    });
-});
-
-
-// If we were able to successfully find any Article, send them back to the client
-app.get("/saved", function (req, res) {
-  db.Article.find({ saved: true })
-    .then(function (retrievedArticles) {
-
-      let hbsObject;
-      hbsObject = {
-        articles: retrievedArticles
-      };
-      res.render("saved", hbsObject);
-    })
     .catch(function (err) {
       // If an error occurred, send it to the client
       res.json(err);
@@ -136,8 +118,37 @@ app.get("/articles", function (req, res) {
     });
 });
 
+// // Route for saving/updating article to be saved
+// app.put("/saved/:id", function(req, res) {
+
+//   db.Article
+//     .findByIdAndUpdate({ _id: req.params.id }, { $set: { saved: true }})
+//     .then(function(dbArticle) {
+//       res.json(dbArticle);
+//     })
+//     .catch(function(err) {
+//       res.json(err);
+//     });
+// });
+
+// If we were able to successfully find any Article, send them back to the client
+app.get("/saved", function (req, res) {
+  db.Article.find({ saved: true })
+    .then(function (retrievedArticles) {   
+      let hbsObject;
+      hbsObject = {
+        articles: retrievedArticles
+      };
+      res.render("saved", hbsObject);
+    })
+    .catch(function (err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
+
 //最后检查一下 data 和 dbArticle 怎么回事
-// Save an article
+
 app.post("/articles/save/:id", function (req, res) {
   db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true })
     .then(function (data) {
@@ -152,7 +163,7 @@ app.post("/articles/save/:id", function (req, res) {
 
 app.post("/articles/delete/:id", function (req, res) {
   // Use the article id to find and update its saved boolean
-  Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": false, "notes": [] })
+  db.Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": false, "notes": [] })
     .then(function (data) {
       // If we were able to successfully find Articles, send them back to the client
       res.json(data);
@@ -199,22 +210,22 @@ app.post("/articles/:id", function (req, res) {
     });
 });
 
-app.delete("/note/:id", function (req, res) {
-  // Create a new note and pass the req.body to the entry
-  db.Note.findByIdAndRemove({ _id: req.params.id })
-      .then(function (dbNote) {
+// app.delete("/note/:id", function (req, res) {
+//   // Create a new note and pass the req.body to the entry
+//   db.Note.findByIdAndRemove({ _id: req.params.id })
+//       .then(function (dbNote) {
 
-          return db.Article.findOneAndUpdate({ note: req.params.id }, { $pullAll: [{ note: req.params.id }]});
-      })
-      .then(function (dbArticle) {
-          // If we were able to successfully update an Article, send it back to the client
-          res.json(dbArticle);
-      })
-      .catch(function (err) {
-          // If an error occurred, send it to the client
-          res.json(err);
-      });
-});
+//           return db.Article.findOneAndUpdate({ note: req.params.id }, { $pullAll: [{ note: req.params.id }]});
+//       })
+//       .then(function (dbArticle) {
+//           // If we were able to successfully update an Article, send it back to the client
+//           res.json(dbArticle);
+//       })
+//       .catch(function (err) {
+//           // If an error occurred, send it to the client
+//           res.json(err);
+//       });
+// });
 
 // Start the server
 app.listen(PORT, function () {
