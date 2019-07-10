@@ -198,7 +198,7 @@ app.post("/articles/:id", function (req, res) {
     });
 });
 
-app.post("/note/:id", function (req, res) {
+app.post("/notes/save/:id", function (req, res) {
   // Create a new note and pass the req.body to the entry
   db.Note.create(req.body)
       .then(function (dbNote) {

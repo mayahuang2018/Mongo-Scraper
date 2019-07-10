@@ -55,19 +55,28 @@
 
 
 <!--Clicked Notes Modal-->
-<div id="noteModal" class="modal modalNote">
-    <div class="modal-content">
-      <h4>Notes for {{title}}</h4>
-      <p>
-        <form class="col s12">
-                 <div class="input-field col s12">
-          <textarea id="noteText{{_id}}" class="materialize-textarea" rows="4" placeholder="New Note"></textarea>
-                </div>
-         </form>
-      </p>
-    </div>
+<div id="noteModal{{_id}}" class="modal modalNote">
+ <div class="modal-content">
+     <h4>Notes for {{_id}}</h4>
+ {{#if notes}}
+  {{#each notes}}    
+      <div id="noteArea">
+        {{body}}
+        </div>
+   {{/each}}
+    {{else}}
+   <h5>No notes for this article yet.</h5>
+{{/if}} 
+    <p>
+   <form class="col s12">
+   <div class="input-field col s12">
+     <textarea id="noteText{{_id}}" class="materialize-textarea" placeholder="New Note"></textarea>
+   </div>
+    </form>
+    </p>
+</div>
     <div class="modal-footer">
-      <a class="modal-close #f48fb1 pink lighten-3 waves-effect waves-pink btn-flat saveNote">Save Note</a>
+      <a class="modal-close #f48fb1 pink lighten-3 waves-effect waves-pink btn-flat saveNote" data={{_id}}>Save Note</a>
     </div>
   </div>
  

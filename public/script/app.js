@@ -51,37 +51,16 @@ $(document).on("click",".deleteArticle", function (){
     $('.modal').modal();
   });
 
-//    $(document).on("click",".addNote", function (){
-//     event.preventDefault();
-//     // $('#noteArea').empty();
-//     $(".materialize-textarea").val("");
-//     var thisId = $(this).data("id");
-//     $(".saveNote").attr('data');
-//     $.ajax({
-//       url:  "/articles/"+thisId,
-//       type: 'GET',
-//       success: function (data){
-//           console.log(data);
-//         $.each(data.notes, function (i, item){
-//           showNote(item, id);
-//         });
-//         $('#noteModal').modal('show');
-//       },
-//       error: function (error) {
-//         showErrorModal(error);
-//       }
-//     });
-//   });//end of .addNote click event
-
    //when user clicks "Save Note" button
-$(".saveNote").on("click", function() {
-    var thisId = $(this).attr("data-id");
+   $(document).on("click",".saveNote", function() {
+    var thisId = $(this).attr("data");
+    console.log(thisId);
     if (!$("#noteText" + thisId).val()) {
         alert("please enter a note to save")
     }else {
       $.ajax({
             method: "POST",
-            url: "/notes/save/" + thisId,
+            url: "/notes/saved/" + thisId,
             data: {
               text: $("#noteText" + thisId).val()
             }
