@@ -10,7 +10,7 @@ var db = require("./models");
 
 
 var path = require("path");
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 3000;
 
 // Initialize Express
 var app = express();
@@ -198,7 +198,7 @@ app.post("/articles/:id", function (req, res) {
     });
 });
 
-app.post("/notes/save/:id", function (req, res) {
+app.post("/notes/saved/:id", function (req, res) {
   // Create a new note and pass the req.body to the entry
   db.Note.create(req.body)
       .then(function (dbNote) {

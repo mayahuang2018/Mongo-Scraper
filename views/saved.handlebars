@@ -55,7 +55,8 @@
 
 
 <!--Clicked Notes Modal-->
-<div id="noteModal{{_id}}" class="modal modalNote">
+<!--<div id="noteModal{{_id}}" class="modal modalNote"> -->
+    <div id="noteModal" class="modal modalNote">
  <div class="modal-content">
      <h4>Notes for {{_id}}</h4>
  {{#if notes}}
@@ -76,7 +77,8 @@
     </p>
 </div>
     <div class="modal-footer">
-      <a class="modal-close #f48fb1 pink lighten-3 waves-effect waves-pink btn-flat saveNote" data={{_id}}>Save Note</a>
+      <a class="modal-close #f48fb1 pink lighten-3 waves-effect waves-pink btn-flat saveNote" data-id={{_id}}>Save Note</a>
     </div>
   </div>
+
  

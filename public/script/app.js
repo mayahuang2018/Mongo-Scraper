@@ -46,10 +46,15 @@ $(document).on("click",".deleteArticle", function (){
   });
 
   //when user clicks "ARTICLE NOTES" button
-
   $(document).ready(function(){
-    $('.modal').modal();
-  });
+  $('.modal').modal(); 
+});
+
+  // $(document).on("click",".addNote",function(){
+  //   var thisId = $(this).attr("data");
+  //   console.log(thisId);
+      
+  // });
 
    //when user clicks "Save Note" button
    $(document).on("click",".saveNote", function() {
@@ -69,7 +74,6 @@ $(document).on("click",".deleteArticle", function (){
               console.log(data);
               // Empty the notes section
               $("#noteText" + thisId).val("");
-              $(".modalNote").modal("hide");
               window.location = "/saved"
           });
     }
@@ -84,7 +88,6 @@ $(document).on("click",".deleteNote", function() {
         url: "/notes/delete/" + noteId + "/" + articleId
     }).done(function(data) {
         console.log(data)
-        $(".modalNote").modal("hide");
         window.location = "/saved"
     })
 });
