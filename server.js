@@ -10,7 +10,7 @@ var db = require("./models");
 
 
 var path = require("path");
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 8080;
 
 // Initialize Express
 var app = express();
@@ -79,8 +79,7 @@ app.get("/scrape", function (req, res) {
         });
 
     });
-
-    // res.render("index",{ results: results });
+    
      res.send("Scrape Complete");
   });
 
@@ -133,8 +132,6 @@ app.get("/saved", function (req, res) {
       res.json(err);
     });
 });
-
-//最后检查一下 data 和 dbArticle 怎么回事
 
 app.post("/articles/save/:id", function (req, res) {
   db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true })

@@ -25,5 +25,13 @@ This is a web app that let users to view the latest international news from **Ne
   * CSS
   * HTML5
 
+ #### One thing I can't finish: In Materialize, to open a modal, I need to type 
+       $(document).ready(function(){
+         $('.modal').modal();
+       });
+#### Then it just became quite difficult for me to show added notes to a saved article. I've asked TA Adam and Meguel, and my online tutor about this issue, but none of them know how to solve it. As a result, I stopped here.
+
+
+
 
 
